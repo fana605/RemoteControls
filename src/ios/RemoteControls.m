@@ -19,20 +19,16 @@ static RemoteControls *remoteControls = nil;
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveRemoteEvent:) name:@"receivedEvent" object:nil];
    
-    NSString *artist = @"Media Name";
-    NSString *title = @"Media Name";
-    NSString *album = @"Media Name";
     
-    if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
                     
                     MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
-                    center.nowPlayingInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-                        artist, @"Media Name",
-                        title, @"Media Name",
-                        album, @"Media Name",
-                        [NSNumber numberWithInt:1], MPNowPlayingInfoPropertyPlaybackRate, nil];
-                }
-    
+
+                    NSDictionary *nowPlayingInfo = @{
+                                 MPMediaItemPropertyTitle : @"Media Name",
+                                 MPMediaItemPropertyArtist : @"Media Artist"
+                    };
+
+                    [center setNowPlayingInfo:[NSDictionary dictionaryWithDictionary:nowPlayingInfo]];
    
 }
 
