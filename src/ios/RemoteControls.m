@@ -19,6 +19,9 @@ static RemoteControls *remoteControls = nil;
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveRemoteEvent:) name:@"receivedEvent" object:nil];
    
+    NSString *artist = @"Media Name";
+    NSString *title = @"Media Name";
+    NSString *album = @"Media Name";
     
     if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
                     
