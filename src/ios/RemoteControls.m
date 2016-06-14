@@ -18,13 +18,19 @@ static RemoteControls *remoteControls = nil;
     NSLog(@"RemoteControls plugin init.");
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveRemoteEvent:) name:@"receivedEvent" object:nil];
-    NSDictionary *nowPlayingInfo = @{
-                                 MPMediaItemPropertyTitle : @"Media Name",
-                                 MPMediaItemPropertyArtist : @"Media Artist",
-                                 MPMediaItemPropertyTitle : @"RTP EURO16"
-                                 };
-
-    [infoCenter setNowPlayingInfo:[NSDictionary dictionaryWithDictionary:nowPlayingInfo]];
+   
+    
+    if (NSClassFromString(@"MPNowPlayingInfoCenter")) {
+                    
+                    MPNowPlayingInfoCenter *center = [MPNowPlayingInfoCenter defaultCenter];
+                    center.nowPlayingInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                        artist, @"Media Name",
+                        title, @"Media Name",
+                        album, @"Media Name",
+                        [NSNumber numberWithInt:1], MPNowPlayingInfoPropertyPlaybackRate, nil];
+                }
+    
+   
 }
 
 - (void)updateMetas:(CDVInvokedUrlCommand*)command
